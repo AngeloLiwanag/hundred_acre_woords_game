@@ -1,0 +1,183 @@
+<script>
+var tigger = {
+    character: "Tigger", 
+    greet: function(){
+        console.log("The wonderful thing about Tiggers is Tiggers are wonderful things!");}
+};
+ // start with just the character attribute
+var pooh = { 
+    character: "Winnie the Pooh",
+    greet: function(){
+        console.log("Youre at your boy's Winnie's house YEEERT??");}
+ };
+var bees = { 
+    character: "Bees",
+    greet: function(){
+        console.log("WHATS HANNIN AT THE BEE'S HOUSEEEEEEEEE?");}
+};
+var piglet = { 
+    character: "Piglet",
+    greet: function(){
+        console.log("Weak ass Pigglets house...");}
+};
+var christopher = { 
+    character: "Christopher Robin",
+    greet: function(){
+        console.log("YESSSSIRRRR WE AT CHRISSSESSS!");}
+};
+var rabbit = { 
+    character: "Rabbit",
+    greet: function(){
+        console.log("Rabbits are trash get out of here");}
+};
+var owl = { 
+    character: "Owl",
+    greet: function(){
+        console.log("BIRDS in the TRAP BABYYYYY");}
+};
+var kanga = { 
+    character: "Kanga",
+    greet: function(){
+        console.log("Kanga kanga kanga boiiii");}
+};
+var gopher = { 
+    character: "Gopher",
+    greet: function(){
+        console.log("Get in get out YAAAAAMSAYN");}
+};
+var eeyore = { 
+    character: "Eeyore",
+    greet: function(){
+        console.log("Eeyore sad asssss");}
+};
+var heffalumps = { 
+    character: "heffalumps",
+    greet: function(){
+        console.log("Heffalumps ya dig?? ");}
+};
+
+// Tigger
+tigger.north = pooh;
+pooh.south = tigger;
+
+
+// Pooh
+tigger.north = pooh; // add more attributes, where we are actually storing the memory location for the other object
+pooh.south = tigger;
+bees.west = pooh;
+pooh.east = bees;
+piglet.east = pooh;
+pooh.west = piglet;
+christopher.south = pooh;
+pooh.north = christopher;
+
+// Bees
+pooh.east = bees;
+bees.west = pooh;
+rabbit.south = bees;
+bees.north = rabbit;
+
+
+// piglet
+pooh.west = piglet;
+piglet.east = pooh;
+owl.south = piglet;
+piglet.north = owl;
+
+// christopher
+kanga.south = christopher;
+christopher.north = kanga;
+rabbit.west = christopher;
+christopher.east = rabbit;
+pooh.north = christopher;
+christopher.south = pooh;
+owl.east = christopher;
+christopher.west = owl;
+
+// rabbit
+gopher.west = rabbit;
+rabbit.east = gopher;
+bees.north = rabbit;
+rabbit.south = bees;
+christopher.east = rabbit;
+rabbit.west = christopher;
+
+// owl
+christopher.west = owl;
+owl.east = christopher;
+piglet.north = owl;
+owl.south = piglet;
+
+// kanga
+eeyore.south = kanga;
+kanga.north = eeyore;
+christopher.north = kanga;
+kanga.south = christopher;
+
+
+// gopher
+rabbit.east = gopher;
+gopher.west = rabbit;
+
+// eeyore
+heffalumps.west = eeyore;
+eeyore.east = heffalumps;
+kanga.north = eeyore;
+eeyore.south = kanga;
+
+// heffalumps
+eeyore.east = heffalumps;
+heffalumps.west = eeyore;
+
+var player = {
+    location: tigger,
+    honey : false
+}
+var location_drop = " ";
+
+function move(direction){
+    if (player.location[direction] == undefined){
+        console.log ("you cant go that guey")
+    } else {
+    player.location = player.location[direction];
+    console.log("You are at " + player.location.character + "'s house");
+    player.location.greet();
+    }
+}
+
+function pickup(){
+    console.log("pickup");
+    console.log(player.location.character);
+    if(player.location.character == 'Bees'){
+        player.honey = true;
+        console.log('pickup honey');
+        console.log(player.honey);
+    }
+}
+
+function mission(){
+    if(player.honey == false){
+        console.log('Winne looking for that honey tho, you down to kick it for a bit and help?');
+    }
+    characters = [pooh, tigger, piglet, christopher, eeyore, rabbit, owl, gopher, kanga, heffalumps];
+    ran = Math.floor(Math.random()*10);
+    var location = characters[ran]['character'];
+    location_drop = location;
+    console.log('Location to drop honey is ' +location);
+    return location
+}
+
+function drop(){
+    if(location_drop === player.location.character){
+        if(!player.honey){
+            console.log("No honey to drop");
+        }else{
+            console.log('congrats, you postmated some honney for winne.');
+            player.honey = false;
+        }
+    
+    }else{
+        console.log("You trippen. you cant drop that honey here.")
+    }
+}
+</script>
